@@ -1,9 +1,8 @@
 
 
 from sklearn.model_selection import GridSearchCV
-# from sklearn.tree import DecisionTreeClassifier
-# from sklearn.ensemble import RandomForestClassifier
-# from sklearn.linear_model import LogisticRegression
+
+from utils.model_saving import save_model 
 
 
 def hypertune_best_model( best_model_name, best_model, X_train, y_train ):
@@ -41,6 +40,25 @@ def hypertune_best_model( best_model_name, best_model, X_train, y_train ):
         search.best_params_,
         search.best_score_
     )
+
+
+
+def best_model_with_params(best_model, best_params, X_train, y_train):
+    """
+    Refit a fresh copy of the selected model using the tuned hyperparameters.
+    """
+    from sklearn.base import clone
+
+    final_model = clone(best_model)
+    final_model.set_params(**best_params)
+    final_model.fit(X_train, y_train)
+
+    return final_model
+
+
+
+
+
 
 
 if __name__ == '__main__':
@@ -116,3 +134,14 @@ if __name__ == '__main__':
     print("Best Model:", best_model_name)
     print("Best Parameters:", best_params)
     print("Best CV Recall:", best_cv_recall)
+    print()
+
+    finalised_model = best_model_with_params(best_model, best_params, X_train, y_train)
+    print("Final Model is completed!")
+    print("Final Model: ", finalised_model)
+    print()
+
+
+    model_path = save_model(finalised_model)
+    print("Saving the Model")
+    print("Path is: ", model_path)
