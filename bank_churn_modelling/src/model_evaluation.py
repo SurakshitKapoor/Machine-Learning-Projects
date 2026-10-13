@@ -142,8 +142,8 @@ if __name__ == '__main__':
     print()
 
     # find best model name, and metrics!
-    find_best_model_name, best_model_metrics = select_best_model(evaluation_results)
-    print(f"Best Model: {find_best_model_name}")
+    best_model_name, best_model_metrics = select_best_model(evaluation_results)
+    print(f"Best Model: {best_model_name}")
     print(f"Best Model Metrics: {best_model_metrics}")
     print()
 
