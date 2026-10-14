@@ -77,7 +77,7 @@ if __name__ == '__main__':
     print() 
 
     # making the data ready for model training by preprocessing the input features
-    X_train, X_test = preprocess_data(X_train, X_test)
+    X_train, X_test, preprocessor = preprocess_data(X_train, X_test)
     print("Data Preprocessing Completed!")
     print("X_train shape:", X_train.shape)
 

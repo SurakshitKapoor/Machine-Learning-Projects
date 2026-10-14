@@ -3,14 +3,14 @@
 import joblib
 from pathlib import Path
 
-def save_model(model):
-    model_path = Path("models") / "best_model.pkl"
-    model_path.parent.mkdir(parents=True, exist_ok=True)
+def save_object(object, object_path ):
+    # model_path = Path("models") / "best_model.pkl"
+    # model_path.parent.mkdir(parents=True, exist_ok=True)
 
-    joblib.dump(model, model_path)
-    print(f"Model saved successfully at: {model_path}")
+    joblib.dump(object, object_path )
+    print(f"Model saved successfully at: {object_path}")
 
-    return model_path
+    return object_path
 
 
 

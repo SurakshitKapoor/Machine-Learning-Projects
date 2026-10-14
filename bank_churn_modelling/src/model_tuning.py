@@ -1,10 +1,11 @@
 
 
 from sklearn.model_selection import GridSearchCV
+from pathlib import Path
+from utils.model_saving import save_object 
 
-from utils.model_saving import save_model 
 
-
+# hyperparameter tuning to improve the model!
 def hypertune_best_model( best_model_name, best_model, X_train, y_train ):
 
     param_grids = {
@@ -43,6 +44,7 @@ def hypertune_best_model( best_model_name, best_model, X_train, y_train ):
 
 
 
+# retraining the best model with tuned best parameters!
 def best_model_with_params(best_model, best_params, X_train, y_train):
     """
     Refit a fresh copy of the selected model using the tuned hyperparameters.
@@ -96,7 +98,7 @@ if __name__ == '__main__':
     print() 
 
     # making the data ready for model training by preprocessing the input features
-    X_train, X_test = preprocess_data(X_train, X_test)
+    X_train, X_test, preprocessor = preprocess_data(X_train, X_test)
     print("Data Preprocessing Completed!")
     print("X_train shape:", X_train.shape)
 
@@ -142,6 +144,12 @@ if __name__ == '__main__':
     print()
 
 
-    model_path = save_model(finalised_model)
+    model_path = save_object(finalised_model, Path("models") / "best_model.pkl")
     print("Saving the Model")
     print("Path is: ", model_path)
+    print()
+
+    preprocessor_path = save_object(preprocessor, Path("models") / "preprocessor.pkl")
+    print("Preprocessor is saved!")
+    print("Path is: ", preprocessor_path)
+    print()

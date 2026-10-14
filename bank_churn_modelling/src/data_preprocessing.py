@@ -68,7 +68,7 @@ def preprocess_data(X_train, X_test):
     X_train = preprocessor.fit_transform(X_train)
     X_test = preprocessor.transform(X_test)
 
-    return X_train, X_test
+    return X_train, X_test, preprocessor
 
 
 
